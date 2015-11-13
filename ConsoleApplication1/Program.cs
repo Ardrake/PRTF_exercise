@@ -27,9 +27,9 @@ namespace ConsoleApplication1
 
             //Console.WriteLine(etudiantListe[0].ToString());
             //Console.WriteLine(etudiantListe[1].ToString());
-
+            //Console.WriteLine(etudiantListe[2].ToString());
+            //etudiantListe.Add(ajouterEtudiant());
             ajouterEtudiant();
-
 
         }
 
@@ -43,7 +43,7 @@ namespace ConsoleApplication1
             Console.WriteLine("4- Quitter");
         }
 
-        private static void ajouterEtudiant() // ajoute un etudiant
+        private static object ajouterEtudiant() // ajoute un etudiant
         {
             etudiant et = new etudiant();
             string idEtudiant;
@@ -54,26 +54,30 @@ namespace ConsoleApplication1
             
             Console.Clear();
             Console.WriteLine("Exercise Etudiant");
-            Console.WriteLine("Nom de l'etudiant :");
-            
+            Console.WriteLine("ID de l'etudiant :");
             idEtudiant = Console.ReadLine().ToUpper();
+
+            Console.WriteLine("Nom de l'etudiant :");
             nomEtudiant = Console.ReadLine().ToUpper();
+
+            Console.WriteLine("Prénom de l'etudiant :");
             prenomEtudiant = Console.ReadLine().ToUpper();
+
+            Console.WriteLine("Note de l'etudiant :");
             noteEtudiant = Console.ReadLine().ToUpper();
 
-            try
+            bool noteValid = Int32.TryParse(noteEtudiant, out valNote);
+            if (noteValid == false)
             {
-                valNote = Int32.Parse(noteEtudiant);
+                Console.WriteLine("conversion de '{0}' a échouer.", noteEtudiant);
             }
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-                Console.ReadKey();
-            }
+            
 
-         
+            et = new etudiant(idEtudiant, nomEtudiant, prenomEtudiant, valNote);
 
-            et = new etudiant(idEtudiant, nomEtudiant, prenomEtudiant, valNote );
+            Console.WriteLine(et.ToString());
+
+            return et;
             
 
         }
