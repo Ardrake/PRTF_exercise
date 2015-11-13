@@ -189,7 +189,7 @@ namespace ConsoleApplication1
                 idEtudiant = a;
                 nomEtudiant = b;
                 prenomEtudiant = c;
-                noteEtudiant = d;
+                note = d;
             }
 
             public string Nom
@@ -209,9 +209,10 @@ namespace ConsoleApplication1
                 set { prenomEtudiant = value; }
             }
 
-            public string note
+            public int note
             {
-                get { return noteEtudiant.ToString(); }
+                get { return noteEtudiant; }
+                set { if (value >= 0 && value <= 100) noteEtudiant = value; }
             }
 
             public override string ToString()
