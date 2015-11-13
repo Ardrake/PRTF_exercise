@@ -8,19 +8,19 @@ namespace ConsoleApplication1
 {
     class Program
     {
+        static List<etudiant> etudiantListe = new List<etudiant>();
         static void Main(string[] args)
         {
-            //menu();
-
-            List<etudiant> etudiantListe = new List<etudiant>();
 
             etudiant et = new etudiant();
 
+            //donnée test
             et = new etudiant("ABC01", "Cooke", "André", 60);
             etudiantListe.Add(et);
 
             et = new etudiant("ABC02", "Asselin", "Maxime");
             etudiantListe.Add(et);
+
 
             int valeurChoix = 0;
 
@@ -38,15 +38,16 @@ namespace ConsoleApplication1
                 }
                 else if (valeurChoix == 2) // Option 2 - Afficher un Étudiant 
                 {
-                    Console.WriteLine("Afficher etudiant");
+                    afficherEtudiant();
                 }
                 else if (valeurChoix == 3) // Option 3 Modifier un Étudiant 
                 {
                     Console.WriteLine("Afficher Modifier un Étudiant");
+                    Console.ReadKey();
                 }
                 else if (valeurChoix == 4) // Option 4 - Afficher tous les Étudiants 
                 {
-                    Console.WriteLine("Afficher tous les Étudiants");
+                    afficherTousLesEtudiant();
                 }
                 else if (valeurChoix == 5) // Option 5 - Sortir du programme 
                 {
@@ -54,7 +55,7 @@ namespace ConsoleApplication1
                 }
 
             }
-            //Console.WriteLine(etudiantListe[0].ToString());
+            //Console.WriteLine(etudiantListe[0].);
             //Console.WriteLine(etudiantListe[1].ToString());
             //Console.WriteLine(etudiantListe[2].ToString());
 
@@ -88,6 +89,7 @@ namespace ConsoleApplication1
                 return 9;
             }
         }
+
 
         private static etudiant ajouterEtudiant() // ajoute un etudiant
         {
@@ -123,17 +125,43 @@ namespace ConsoleApplication1
             return et;
         }
 
+
         private static void afficherEtudiant() // affiche un etudiant
         {
             string idEtudiant;
+            bool etudiantTrouve = false;
             Console.WriteLine("indiquer le ID de l'etudiant :");
             idEtudiant = Console.ReadLine().ToUpper();
-            
-            Console.WriteLine("Étudiant trouvé : {0}","code");
+
+            foreach (etudiant etu in etudiantListe)
+            {
+                if (etu.ID == idEtudiant)
+                {
+                    //Console.WriteLine(idEtudiant, etu.ID);
+                    Console.WriteLine("Etudiant trouvé : {0}, {1}, Note : {2}", etu.Nom, etu.Prenom, etu.note);
+                    etudiantTrouve = true;
+                }
+            }
+
+            if (!etudiantTrouve)
+            {
+                Console.WriteLine("Etudiant: {0}, non trouvé", idEtudiant);
+            }
+            Console.ReadKey();
+        }
+
+        private static void afficherTousLesEtudiant() // affiche tous les étudiants
+        {
+            foreach (etudiant etu in etudiantListe) // pour chaque etudiant dans la liste etudiantListe etu prend la valeur de l'etudiant de la liste
+            {
+                Console.WriteLine("Etudiant : {0}, {1}, Note = {2}", etu.Nom, etu.Prenom, etu.note); // affichage de l'information
+            }
+            Console.ReadKey();
 
         }
 
-        class etudiant
+
+    class etudiant
         {
             private string idEtudiant;
             private string nomEtudiant;
@@ -169,6 +197,12 @@ namespace ConsoleApplication1
                 get { return nomEtudiant; }
                 set { nomEtudiant = value; }
             }
+
+            public string ID
+            {
+                get { return idEtudiant; }
+            }
+
             public string Prenom
             {
                 get { return prenomEtudiant; }
