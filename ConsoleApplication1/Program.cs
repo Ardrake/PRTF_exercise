@@ -12,27 +12,27 @@ namespace ConsoleApplication1
         {
             //menu();
 
+
+
             List<etudiant> etudiantListe = new List<etudiant>();
 
             etudiant et = new etudiant();
 
-            //et.idEtudiant = "ABC03";
-            //et.nomEtudiant = "Cooke";
-            //et.prenomEtudiant = "André";
-            //et.noteEtudiant = 80;
-            //etudiantListe.Add(et);
-
-            et = new etudiant("ABC01", "Cooke", "Jonathan", 60);
+            et = new etudiant("ABC01", "Cooke", "André", 60);
             etudiantListe.Add(et);
 
             et = new etudiant("ABC02", "Asselin", "Maxime");
             etudiantListe.Add(et);
 
 
-            Console.WriteLine(etudiantListe[0].ToString());
-            Console.WriteLine(etudiantListe[1].ToString());
+            //Console.WriteLine(etudiantListe[0].ToString());
+            //Console.WriteLine(etudiantListe[1].ToString());
+
+            ajouterEtudiant();
+
 
         }
+
         private static void menu() // affichage du menu
         {
             Console.Clear();
@@ -43,6 +43,45 @@ namespace ConsoleApplication1
             Console.WriteLine("4- Quitter");
         }
 
+        private static void ajouterEtudiant() // ajoute un etudiant
+        {
+            etudiant et = new etudiant();
+            string idEtudiant;
+            string nomEtudiant;
+            string prenomEtudiant;
+            string noteEtudiant;
+            bool noteValide = false;
+            int valNote;
+
+            Console.Clear();
+            Console.WriteLine("Exercise Etudiant");
+            Console.WriteLine("Nom de l'etudiant :");
+            
+            idEtudiant = Console.ReadLine().ToUpper();
+            nomEtudiant = Console.ReadLine().ToUpper();
+            prenomEtudiant = Console.ReadLine().ToUpper();
+            noteEtudiant = Console.ReadLine().ToUpper();
+
+            try
+            {
+                int a = Int32.Parse(noteEtudiant);
+                noteValide = true;
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+
+            if (noteValide)
+            {
+                valNote = Int32.Parse(noteEtudiant);
+            }
+
+            et = new etudiant(idEtudiant, nomEtudiant, prenomEtudiant, valNote );
+            
+
+        }
 
 
         class etudiant
