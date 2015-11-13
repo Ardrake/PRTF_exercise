@@ -50,9 +50,8 @@ namespace ConsoleApplication1
             string nomEtudiant;
             string prenomEtudiant;
             string noteEtudiant;
-            bool noteValide = false;
             int valNote;
-
+            
             Console.Clear();
             Console.WriteLine("Exercise Etudiant");
             Console.WriteLine("Nom de l'etudiant :");
@@ -64,8 +63,7 @@ namespace ConsoleApplication1
 
             try
             {
-                int a = Int32.Parse(noteEtudiant);
-                noteValide = true;
+                valNote = Int32.Parse(noteEtudiant);
             }
             catch (FormatException e)
             {
@@ -73,10 +71,7 @@ namespace ConsoleApplication1
                 Console.ReadKey();
             }
 
-            if (noteValide)
-            {
-                valNote = Int32.Parse(noteEtudiant);
-            }
+         
 
             et = new etudiant(idEtudiant, nomEtudiant, prenomEtudiant, valNote );
             
